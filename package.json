@@ -1,0 +1,11 @@
+{
+  "name": "CIS371_ReservationApp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/IWilkewitz/CIS371_ReservationApp.git",
+  "author": "IWilkewitz <46975927+IWilkewitz@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@vue/cli": "^4.5.12"
+  }
+}
