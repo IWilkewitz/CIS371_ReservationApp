@@ -4,6 +4,7 @@
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <div id="components">
       <MyProfile />
+      <Login />
     </div>
   </div>
 
@@ -13,10 +14,11 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
 import MyProfile from './components/MyProfile.vue';
+import Login from './components/Login.vue';
 
 @Component({
   components: {
-    HelloWorld, MyProfile
+    HelloWorld, MyProfile, Login
   },
 })
 

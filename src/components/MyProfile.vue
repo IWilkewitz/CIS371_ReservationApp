@@ -74,4 +74,6 @@ export default class MyProfile extends Vue {
     padding: 1em;
     text-align: left;
 }
+
+
 </style>
