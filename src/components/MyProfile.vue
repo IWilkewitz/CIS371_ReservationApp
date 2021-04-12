@@ -3,12 +3,20 @@
         <h1>My Profile</h1>
         <div id="my-reservations">
             <h3>My Reservations</h3>
-            <br/>
-            <label>Date:</label>
-            <br/>
-            <label>Time:</label>
-            <br/>
-            <br/>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date:</th>
+                        <th>Time:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(z,pos) in reservations" :key="pos">
+                        <td>{{z.date}}</td>
+                        <td>${{z.time}}</td>
+                    </tr>
+                </tbody>
+            </table>
             <button type="button" id="cancelReservation" v-on:click="cancelReservation()">Cancel Reservation</button>
         </div>
         <div id="account-details">
