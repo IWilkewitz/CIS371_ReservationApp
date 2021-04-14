@@ -1,19 +1,18 @@
 <template>
     <div id="user-login">
-        <h3>Log Into Your Account</h3>
-        <p>In order to log in, please enter the email and password associated with your account.</p>
-        <label>Email:</label>
-        <input type="text" v-model="userEmail" placeholder="Enter Your Email">
+        <h3>Sign In</h3>
+        <p>Please enter the email and password associated with your account.</p>
+        <input type="text" v-model="userEmail" placeholder="Email">
         <br/>
         <br/>
-        <label>Password:</label>
-        <input type="text" v-model="userPassword" placeholder="Enter Your Password">
-        <br/>
-        <br/>
-        <button :disabled="noInput" v-on:click="createAccount">Create an Account</button>
+        <input type="text" v-model="userPassword" placeholder="Password">
         <br/>
         <br/>
         <button :disabled="noInput" v-on:click="authenticate">Sign In</button>
+        <br/>
+        <br/>
+        <p>Don't have an account?</p>
+        <button :disabled="noInput" v-on:click="createAccount">Create an Account</button>
         <br/>
         <br/>
         <div>{{message}}</div>
@@ -46,6 +45,10 @@ export default class Login extends Vue {
         .catch((err: any) => {
         this.showMessage(`Unable to create account ${err}`);
         });    
+        // In createAccount()
+        this.$router.push({ path: "/MyProfile" });
+        // or equivalently
+        this.$router.push({ name: "MyProfile" });
     }
 
     authenticate(): void {
@@ -57,6 +60,10 @@ export default class Login extends Vue {
         .catch((err: any) => {
         this.showMessage(`Unable to login ${err}`);
         });
+        // In authenticate()
+        this.$router.push({ path: "/MyProfile" });
+        // or equivalently
+        this.$router.push({ name: "MyProfile" });
     }
 
     showMessage(m: string): void {
@@ -73,13 +80,35 @@ export default class Login extends Vue {
 
 #user-login {
     display:inline-block;
-    border: 3px solid black;
-    border-radius: 1.5em;
+    margin:3em auto;
+    width:450px;
+    height:375px;
+    border: 2px solid lightsteelblue;
+    border-radius: 1em;
     padding: 1em;
-    text-align: left;
+    text-align: center;
+    background: rgb(240, 240, 240);
 }
 
-h3, p {
+h3 {
     text-align: center;
 }
+
+p {
+    text-align: center;
+    font-size: 0.80em;
+    font-style: italic;
+}
+
+button {
+    padding: 5px;
+    border-radius: 5em;
+    background: lightsteelblue;
+    color: black;
+}
+
+input {
+    text-align: center;
+}
+
 </style>

@@ -49,6 +49,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import App from './components/App.vue';
+import { FirebaseAuth, UserCredential } from "@firebase/auth-types";
 
 @Component({
   components: {
@@ -56,6 +57,9 @@ import App from './components/App.vue';
 })
 export default class MyProfile extends Vue {
   
+    readonly $appAuth!: FirebaseAuth;
+    private uid = "none"
+
 }
 </script>
 
@@ -84,6 +88,8 @@ export default class MyProfile extends Vue {
     padding: 1em;
     text-align: left;
 }
+
+
 
 
 </style>

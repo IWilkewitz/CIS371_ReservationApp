@@ -31,8 +31,12 @@
       </div>
     </nav>
     <div id="components">
-      <MyProfile />
-      <Login />
+      <h1>Restaurant Reservation App</h1>
+      <h6>By: Erin Long, Jon Rabideau, and Ian Wilkewitz</h6>
+      <router-view></router-view>
+    </div>
+    <div id="logout">
+      <button v-if="userLoggedIn()">Logout</button>
     </div>
   </div>
 
@@ -46,6 +50,7 @@ import Login from './components/Login.vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { FirebaseAuth, UserCredential } from "@firebase/auth-types";
 
 @Component({
   components: {
@@ -54,6 +59,17 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 })
 
 export default class App extends Vue {
+
+  readonly $appAuth!: FirebaseAuth;
+
+  userLoggedIn(): boolean {
+  return this.$appAuth.currentUser?.uid !== undefined;
+}
+
+doLogout(): void {
+  this.$appAuth.signOut();
+  this.$router.back();    // Go backward in the "history stack"
+}
   
 }
 </script>
