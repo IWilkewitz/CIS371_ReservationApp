@@ -20,6 +20,20 @@
                         </tr>
                     </tbody>
                     <br/>
+                    <label>My Favorite Cuisines</label>
+        <br/>
+            <div id="checkboxes">
+                <input type="checkbox" id="food1" name="food1" value="Mexican">
+                <label for="food1"> Mexican</label><br>
+                <input type="checkbox" id="food2" name="food2" value="Chinese">
+                <label for="food2"> Chinese</label><br>
+                <input type="checkbox" id="food3" name="food3" value="Italian">
+                <label for="food3"> Italian</label><br>
+                <input type="checkbox" id="food4" name="food4" value="Greek">
+                <label for="food4"> Greek</label><br>
+                <input type="checkbox" id="food5" name="food5" value="Italian">
+                <label for="food5"> Indian</label><br>
+            </div>
                 <button type="button" id="cancelReservation" v-on:click="cancelReservation()">Cancel Reservation</button>
                 </table>
             </div>

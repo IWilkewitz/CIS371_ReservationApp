@@ -87,7 +87,7 @@ export default class Login extends Vue {
     border-radius: 1em;
     padding: 1em;
     text-align: center;
-    background: rgb(240, 240, 240);
+    background: rgb(248, 247, 247);
 }
 
 h3 {
