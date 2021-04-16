@@ -1,14 +1,17 @@
 <template>
   <div>
-    <div >
-      <h1>Local Favorites</h1>
+    <div>
+      <h1>Local Favorites </h1>
+      <div>
+        
+      </div>
       <div id="restCards" v-for="(z, pos) in restaurants" :key="pos">
         <img :src="z.picture" alt="" style="width:300px;height:200px;" />
         <div id="restInfo">
-        <h2>{{ z.name }}</h2>
-        <h3>Address: {{ z.address }}</h3>
-        <h3>Phone Number: {{ z.phone }}</h3>
-        <h3>Cuisine: {{ z.cuisine }}</h3>
+          <h2>{{ z.name }}</h2>
+          <h3>Address: {{ z.address }}</h3>
+          <h3>Phone Number: {{ z.phone }}</h3>
+          <h3>Cuisine: {{ z.cuisine }}</h3>
         </div>
       </div>
     </div>
@@ -31,8 +34,16 @@ export default class Home extends Vue {
   readonly $appAuth!: FirebaseAuth;
   readonly $router!: any;
   private restaurants: any[] = [];
+
+  
+
+search(): void {
+    var formInput= "west"
+    
+    console.log(formInput)
+}
+
   mounted(): void {
-    console.log("Test");
     this.$appDB
       .collection("restaurants")
       .orderBy("name")
@@ -60,20 +71,22 @@ export default class Home extends Vue {
   margin: 1em;
   display: inline-block;
   flex-direction: column;
- 
 }
 
 #restCards h3 {
-    text-align: left;
+  text-align: left;
 }
 
 #restInfo {
-    
-    text-align: left;
+  text-align: left;
 }
 
-img{
-    
-    vertical-align: middle;
+img {
+  vertical-align: middle;
+}
+
+form {
+  display: inline-block;
+  margin: 6em;
 }
 </style>

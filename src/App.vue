@@ -30,17 +30,22 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input
+            id="search"
             class="form-control mr-sm-2"
             type="search"
             placeholder="Search for a Restaurant"
             aria-label="Search"
           />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          <button
+            class="btn btn-outline-success my-2 my-sm-0"
+            type="submit"
+          >
             Search
           </button>
         </form>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
+            
             <a class="nav-link" href="#"
               >Sign In <span class="sr-only">(current)</span></a
             >
@@ -87,41 +92,7 @@ export default class App extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;
   readonly $router!: any;
-  private restaurants: any[] = [];
-  mounted(): void {
-    console.log("Test");
-    this.$appDB
-      .collection("restaurants")
-      .orderBy("name")
-      .onSnapshot((qs: QuerySnapshot) => {
-        this.restaurants.splice(0);
-        qs.forEach((qds: QueryDocumentSnapshot) => {
-          if (qds.exists) {
-            const restData = qds.data();
-            this.restaurants.push({
-              name: restData.name,
-              cuisine: restData.cuisine,
-              address: restData.address,
-              phone: restData.phone,
-              picture: restData.picture,
-            });
-          }
-        });
-      });
-    
-  }
-
-  GoToAddRestaurant(): void {
-    this.$router.push({ path: "/myrestaurant" });
-  }
-
-  GoToHome(): void {
-    this.$router.push({ path: "/" });
-  }
-
-  GoToMyProfile(): void {
-    this.$router.push({ path: "/myprofile" });
-  }
+  
 
   userLoggedIn(): boolean {
     return this.$appAuth.currentUser?.uid !== undefined;
