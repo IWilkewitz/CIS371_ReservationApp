@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Restaurant Reservation Application</a>
+      <a class="navbar-brand" href="/">Restaurant Reservation Application<br><p><small>By: Erin Long, Jon Rabideau, and Ian Wilkewitz</small></p></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -28,7 +28,7 @@
             <a class="nav-link" href="MyProfile">My Profile</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <!-- <form class="form-inline my-2 my-lg-0">
           <input
             id="search"
             class="form-control mr-sm-2"
@@ -42,11 +42,11 @@
           >
             Search
           </button>
-        </form>
+        </form> -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             
-            <a class="nav-link" href="#"
+            <a class="nav-link" href="Login"
               >Sign In <span class="sr-only">(current)</span></a
             >
           </li>
@@ -54,8 +54,8 @@
       </div>
     </nav>
     <div id="components">
-      <h1>Restaurant Reservation App</h1>
-      <h6>By: Erin Long, Jon Rabideau, and Ian Wilkewitz</h6>
+      <!-- <h1>Restaurant Reservation App</h1>
+      <h6>By: Erin Long, Jon Rabideau, and Ian Wilkewitz</h6> -->
       <router-view></router-view>
     </div>
     <div id="logout">

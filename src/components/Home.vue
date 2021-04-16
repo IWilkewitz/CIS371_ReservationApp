@@ -1,17 +1,24 @@
 <template>
   <div>
     <div>
-      <h1>Local Favorites</h1>
       <div>
-        <input v-model="search" type="text" id="searchRest" placeholder="Enter restaurant name or cuisine type..."><button v-on:click="searchRest()">Search</button>
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            v-model="search"
+            type="text"
+            id="searchRest"
+            placeholder="Enter restaurant name or cuisine type..."
+            class="form-control mr-sm-2"
+          /><button v-on:click="searchRest()" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+        </form>
       </div>
       <div id="restCards" v-for="(z, pos) in restaurants" :key="pos">
         <img :src="z.picture" alt="" style="width:300px;height:200px;" />
         <div id="restInfo">
           <h2>{{ z.name }}</h2>
-          <h3>Address: {{ z.address }}</h3>
-          <h3>Phone Number: {{ z.phone }}</h3>
-          <h3>Cuisine: {{ z.cuisine }}</h3>
+          <h4>Address: {{ z.address }}</h4>
+          <h4>Phone Number: {{ z.phone }}</h4>
+          <h4>Cuisine: {{ z.cuisine }}</h4>
         </div>
       </div>
     </div>
@@ -35,30 +42,30 @@ export default class Home extends Vue {
   readonly $router!: any;
   private restaurants: any[] = [];
   private holdingArray: any[] = [];
-  private search = '';
+  private search = "";
 
-  
-
-searchRest(): void {
-    var formInput= this.search;
+  searchRest(): void {
+    var formInput = this.search;
     var newArray: any[] = [];
-    if(this.holdingArray[0] != null){
-        this.restaurants = [...this.holdingArray]
-    }else{
-    this.holdingArray = [...this.restaurants];
+    if (this.holdingArray[0] != null) {
+      this.restaurants = [...this.holdingArray];
+    } else {
+      this.holdingArray = [...this.restaurants];
     }
-    if(formInput != ''){
-    this.restaurants.forEach(element => {
-        if(element.name.toUpperCase() == formInput.toUpperCase() || element.cuisine.toUpperCase() == formInput.toUpperCase()){
-            newArray.push(element);
+    if (formInput != "") {
+      this.restaurants.forEach((element) => {
+        if (
+          element.name.toUpperCase() == formInput.toUpperCase() ||
+          element.cuisine.toUpperCase() == formInput.toUpperCase()
+        ) {
+          newArray.push(element);
         }
         this.restaurants = newArray;
-    })}else{
-        this.restaurants = [...this.holdingArray]
+      });
+    } else {
+      this.restaurants = [...this.holdingArray];
     }
-    
-    
-}
+  }
 
   mounted(): void {
     this.$appDB
@@ -102,14 +109,10 @@ img {
   vertical-align: middle;
 }
 
-form {
-  display: inline-block;
-  margin: 6em;
-}
+#searchRest {
+  width: 30%;
 
-input {
-    width: 20%;
-    margin-right: 40%;
-    margin-left: 40%;
+  margin-left: 35%;
+  margin-right: .25em;
 }
 </style>

@@ -18,19 +18,16 @@ const myRoutes: Array<RouteConfig> = [
     path: "/myrestaurant",
     component: MyRestaurant,
   },
-  {
-    name: "My Profile",
-    path: "/myprofile",
-  },
+ 
   {
     name: "Login",
-    path: "/",
+    path: "/login",
     component: Login,
   },
 
   {
     name: "MyProfile",
-    path: "/category",
+    path: "/myprofile",
     component: MyProfile,
   }
 ];
