@@ -23,7 +23,7 @@
         <label>Picture URL</label>
         <input type="text" v-model="restPicture" />
       </div>
-      <button v-on:click="addRestaurant">Add</button>
+      <button v-on:click="addRestaurant" class="btn btn-outline-success  my-sm-0">Add</button>
     </div>
   </div>
 </template>

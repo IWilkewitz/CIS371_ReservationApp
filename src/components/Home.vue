@@ -2,15 +2,16 @@
   <div>
     <div>
       <div>
-        <form class="form-inline my-2 my-lg-0">
+        <div class="form-inline">
           <input
             v-model="search"
-            type="text"
+            type=""
             id="searchRest"
             placeholder="Enter restaurant name or cuisine type..."
             class="form-control mr-sm-2"
-          /><button v-on:click="searchRest()" class="btn btn-outline-success my-2 my-sm-0">Search</button>
-        </form>
+            @keyup.enter="searchRest()"
+          /><button v-on:click="searchRest()" class="btn btn-outline-success  my-sm-0" type='button'>Search</button>
+        </div>
       </div>
       <div id="restCards" v-for="(z, pos) in restaurants" :key="pos">
         <img :src="z.picture" alt="" style="width:300px;height:200px;" />
@@ -68,6 +69,8 @@ export default class Home extends Vue {
   }
 
   mounted(): void {
+      
+
     this.$appDB
       .collection("restaurants")
       .orderBy("name")
