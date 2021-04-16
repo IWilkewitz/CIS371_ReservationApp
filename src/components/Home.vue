@@ -3,7 +3,7 @@
     <div>
       <h1>Local Favorites</h1>
       <div>
-        
+        <input v-model="search" type="text" id="searchRest" placeholder="Enter restaurant name or cuisine type..."><button v-on:click="searchRest()">Search</button>
       </div>
       <div id="restCards" v-for="(z, pos) in restaurants" :key="pos">
         <img :src="z.picture" alt="" style="width:300px;height:200px;" />
@@ -34,13 +34,30 @@ export default class Home extends Vue {
   readonly $appAuth!: FirebaseAuth;
   readonly $router!: any;
   private restaurants: any[] = [];
+  private holdingArray: any[] = [];
+  private search = '';
 
   
 
-search(): void {
-    var formInput= "west"
+searchRest(): void {
+    var formInput= this.search;
+    var newArray: any[] = [];
+    if(this.holdingArray[0] != null){
+        this.restaurants = [...this.holdingArray]
+    }else{
+    this.holdingArray = [...this.restaurants];
+    }
+    if(formInput != ''){
+    this.restaurants.forEach(element => {
+        if(element.name.toUpperCase() == formInput.toUpperCase() || element.cuisine.toUpperCase() == formInput.toUpperCase()){
+            newArray.push(element);
+        }
+        this.restaurants = newArray;
+    })}else{
+        this.restaurants = [...this.holdingArray]
+    }
     
-    console.log(formInput)
+    
 }
 
   mounted(): void {
@@ -88,5 +105,11 @@ img {
 form {
   display: inline-block;
   margin: 6em;
+}
+
+input {
+    width: 20%;
+    margin-right: 40%;
+    margin-left: 40%;
 }
 </style>
