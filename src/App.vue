@@ -1,22 +1,46 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <h1>Rezzy</h1>
+    <button @click="GoToHome">Home</button>
+    <button @click="GoToMyProfile">My Profile</button>
+    <button @click="GoToAddRestaurant">Add My Restaurant</button>
+    <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
+import MyRestaurant from "./components/MyRestaurant.vue";
+import { FirebaseFirestore } from "@firebase/firestore-types";
+import { FirebaseAuth } from "@firebase/auth-types";
 
 @Component({
   components: {
-    HelloWorld,
+    MyRestaurant
   },
 })
 export default class App extends Vue {
-  mounted(): void{}
+  readonly $appDB!: FirebaseFirestore;
+  readonly $appAuth!: FirebaseAuth;
+  readonly $router!: any;
+  mounted(): void {
+    console.log("Test")
+  }
+
+  GoToAddRestaurant(): void{
+    this.$router.push({path: "/myrestaurant"})
+  }
+
+  GoToHome(): void{
+    this.$router.push({path: "/"})
+  }
+
+  GoToMyProfile(): void{
+    this.$router.push({path: "/myprofile"})
+  }
 }
+
 </script>
 
 <style>
