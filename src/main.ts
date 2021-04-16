@@ -3,7 +3,7 @@ import App from "./App.vue";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import {AppRouter} from "./app-routing";
+import { AppRouter } from "./app-routing";
 
 Vue.config.productionTip = false;
 
