@@ -79,15 +79,18 @@ export default class Login extends Vue {
 <style>
 
 #user-login {
+    font-size: 80%;
+	border-top-left-radius: 5rem;
+	border-top-right-radius: 5rem;
+	border-bottom-right-radius: 5rem;
+	border-bottom-left-radius: 5rem;
+	letter-spacing: 0.1rem;
+	font-weight: bold;
+	padding-top: 1rem;
+	padding-right: 1rem;
+	padding-bottom: 1rem;
+	padding-left: 1rem;
     display:inline-block;
-    margin:3em auto;
-    width:450px;
-    height:375px;
-    border: 2px solid lightsteelblue;
-    border-radius: 1em;
-    padding: 1em;
-    text-align: center;
-    background: rgb(248, 247, 247);
 }
 
 h3 {
@@ -96,19 +99,21 @@ h3 {
 
 p {
     text-align: center;
-    font-size: 0.80em;
+    font-size: 0.90em;
     font-style: italic;
 }
 
 button {
-    padding: 5px;
-    border-radius: 5em;
-    background: lightsteelblue;
-    color: black;
+	border-radius: 2em;
+	letter-spacing: 0.1rem;
+	font-weight: bold;
+	padding: 0.5em;
+    color:black;
 }
 
 input {
     text-align: center;
+    padding: 0.5em;
 }
 
 </style>

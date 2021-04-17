@@ -71,7 +71,4 @@ export default class MyRestaurant extends Vue {
   width: 18%;
 }
 
-input{
-  float: right;
-}
 </style>

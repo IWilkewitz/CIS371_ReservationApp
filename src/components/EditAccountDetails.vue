@@ -69,7 +69,7 @@ export default class Home extends Vue {
 }
 
 p {
-    text-align: left;
+    text-align: center;
 }
 
 </style>
