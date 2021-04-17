@@ -46,9 +46,9 @@ export default class Login extends Vue {
         this.showMessage(`Unable to create account ${err}`);
         });    
         // In createAccount()
-        this.$router.push({ path: "/MyProfile" });
+        this.$router.push({ path: "/Home" });
         // or equivalently
-        this.$router.push({ name: "MyProfile" });
+        this.$router.push({ name: "Home" });
     }
 
     authenticate(): void {
@@ -61,9 +61,9 @@ export default class Login extends Vue {
         this.showMessage(`Unable to login ${err}`);
         });
         // In authenticate()
-        this.$router.push({ path: "/MyProfile" });
+        this.$router.push({ path: "/Home" });
         // or equivalently
-        this.$router.push({ name: "MyProfile" });
+        this.$router.push({ name: "Home" });
     }
 
     showMessage(m: string): void {
