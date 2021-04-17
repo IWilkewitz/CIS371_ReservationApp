@@ -42,7 +42,7 @@
         </div>
         <div id="account-details">
             <h3>My Account Details</h3>
-            <button type="button" id="editAccountDetails" v-on:click="editAccountDetails()">Edit</button>
+            <button type="button" id="edit" v-on:click="edit">Edit My Account Details</button>
             <br/>
             <label>Name:</label>
             <br/>
@@ -73,6 +73,12 @@ export default class MyProfile extends Vue {
   
     readonly $appAuth!: FirebaseAuth;
     private uid = "none"
+
+    edit(): void {
+        this.$router.push({ path: "/EditAccountDetails" });
+        // or equivalently
+        this.$router.push({ name: "EditAccountDetails" });
+    }
 
 }
 </script>

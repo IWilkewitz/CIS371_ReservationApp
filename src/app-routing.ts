@@ -1,38 +1,31 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import MyRestaurant from "./components/MyRestaurant.vue";
-import Home from "./components/Home.vue";
 import Login from "./components/Login.vue";
-import CreateAccount from "./components/CreateAccount.vue";
 import MyProfile from "./components/MyProfile.vue";
+import EditAccountDetails from "./components/EditAccountDetails.vue";
 Vue.use(VueRouter);
 
 const myRoutes: Array<RouteConfig> = [
   {
-    name: "Home",
-    path:"/",
-    component: Home,
-  },
-  {
-    name: "Add My Restaurant",
-    path: "/myrestaurant",
-    component: MyRestaurant,
-  },
- 
-  {
     name: "Login",
-    path: "/login",
+    path: "/",
     component: Login,
   },
 
   {
     name: "MyProfile",
-    path: "/myprofile",
+    path: "/MyProfile",
     component: MyProfile,
+  },
+
+  {
+    name: "EditAccountDetails",
+    path: "/EditAccountDetails",
+    component: EditAccountDetails,
   }
 ];
 
 export const AppRouter = new VueRouter({ 
   routes: myRoutes, 
   mode: "history" 
-});  
+});   
