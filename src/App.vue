@@ -25,6 +25,9 @@
             <a class="nav-link" href="MyRestaurant">My Restaurants</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="FeaturedRestaurants">Find Restaurant</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="MyProfile">My Profile</a>
           </li>
         </ul>
@@ -69,6 +72,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import MyRestaurant from "./components/MyRestaurant.vue";
 import Home from "./components/Home.vue";
+import FeaturedRestaurants from "./components/FeaturedRestaurants.vue";
 import {
   FirebaseFirestore,
   QueryDocumentSnapshot,
@@ -80,12 +84,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import { FirebaseAuth, UserCredential } from "@firebase/auth-types";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+
 @Component({
   components: {
     MyProfile,
     Login,
     MyRestaurant,
-    Home
+    Home,
+    FeaturedRestaurants
   },
 })
 export default class App extends Vue {

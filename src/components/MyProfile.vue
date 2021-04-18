@@ -42,7 +42,7 @@
         </div>
         <div id="account-details">
             <h3>My Account Details</h3>
-            <button type="button" id="edit" v-on:click="edit">Edit My Account Details</button>
+            <button type="button" id="edit" v-on:click="edit">Edit My Account</button>
             <br/>
             <label>Name:</label>
             <br/>

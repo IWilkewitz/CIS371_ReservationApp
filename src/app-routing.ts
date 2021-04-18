@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Login from "./components/Login.vue";
 import MyProfile from "./components/MyProfile.vue";
+import FeaturedRestaurants from "./components/FeaturedRestaurants.vue";
 import Home from "./components/Home.vue";
 import MyRestaurant from "./components/MyRestaurant.vue";
 import EditAccountDetails from "./components/EditAccountDetails.vue";
@@ -36,7 +37,14 @@ const myRoutes: Array<RouteConfig> = [
     name: "Home",
     path: "/Home",
     component: Home,
+  },
+
+  {
+    name: "FeaturedRestaurants",
+    path: "/FeaturedRestaurants",
+    component: FeaturedRestaurants,
   }
+  
 ];
 
 export const AppRouter = new VueRouter({ 

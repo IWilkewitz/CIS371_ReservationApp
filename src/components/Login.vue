@@ -91,6 +91,7 @@ export default class Login extends Vue {
 	padding-bottom: 1rem;
 	padding-left: 1rem;
     display:inline-block;
+    
 }
 
 h3 {
