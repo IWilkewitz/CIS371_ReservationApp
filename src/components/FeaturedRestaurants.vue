@@ -45,9 +45,15 @@ interface Restaurant {
 export default class FeaturedRestaurants extends Vue {
     readonly $appDB!: FirebaseFirestore;
     readonly $appAuth!: FirebaseAuth;
+    private uid = "none"
     readonly $router!: any;
     private restaurantData: Restaurant[] = [];
     private userSearch = ""; 
+    private userFavorites: any[] = [];
+
+    mounted(): void {
+        this.uid = this.$appAuth.currentUser?.uid ?? "none";
+    }
 
     findRestaurant() {
         var url = 'https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/' + this.userSearch;
@@ -62,6 +68,24 @@ export default class FeaturedRestaurants extends Vue {
             this.restaurantData = r.data.result.data
         })
         console.log(this.restaurantData);
+    }
+
+    markAsFavorite() {
+        this.uid = this.$appAuth.currentUser?.uid ?? "none";
+        this.$appDB.collection(`users/${this.uid}/my-favorites`)
+        .onSnapshot((qs: QuerySnapshot) => {
+        this.userFavorites.splice(0);
+        qs.forEach((qds: QueryDocumentSnapshot) => {
+          if (qds.exists) {
+            const favorites = qds.data();
+            this.userFavorites.push({
+              name: favorites.restaurant_name,
+              phone: favorites.restaurant_phone,
+              address: favorites.address.street
+            });
+          }
+        });
+      });
     }
 
 }
