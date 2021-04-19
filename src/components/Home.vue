@@ -169,8 +169,8 @@ export default class Home extends Vue {
     if (formInput != "") {
       this.allRestaurants.forEach((element) => {
         if (
-          element.name.toUpperCase() == formInput.toUpperCase() ||
-          element.cuisine.toUpperCase() == formInput.toUpperCase()
+          element.name.toUpperCase().includes(formInput.toUpperCase()) ||
+          element.cuisine.toUpperCase().includes(formInput.toUpperCase())
         ) {
           newArray.push(element);
         }
