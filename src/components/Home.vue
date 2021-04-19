@@ -90,7 +90,7 @@ export default class Home extends Vue {
         });
       });
 
-      console.log(this.restaurants)
+      
   }
 }
 </script>
