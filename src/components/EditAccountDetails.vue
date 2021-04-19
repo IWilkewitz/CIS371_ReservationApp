@@ -44,7 +44,7 @@ export default class Home extends Vue {
 
 
     editAccountDetails(): void {
-    this.$appDB.collection(`account-details`).add({
+    this.$appDB.collection(`users`).add({
       firstName: this.firstName,
       lastName: this.lastName,
       phone: this.phoneNumber,
