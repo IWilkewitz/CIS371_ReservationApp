@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 const myRoutes: Array<RouteConfig> = [
   {
     name: "Login",
-    path: "/",
+    path: "/Login",
     component: Login,
   },
 
@@ -35,7 +35,7 @@ const myRoutes: Array<RouteConfig> = [
 
   {
     name: "Home",
-    path: "/Home",
+    path: "/",
     component: Home,
   },
 
