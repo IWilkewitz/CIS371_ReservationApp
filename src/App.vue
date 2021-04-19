@@ -22,11 +22,11 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="MyRestaurant">My Restaurants</a>
+            <a class="nav-link" href="MyRestaurant">Add My Restaurant</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="FeaturedRestaurants">Find Restaurant</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="MyProfile">My Profile</a>
           </li>

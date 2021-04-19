@@ -2,7 +2,6 @@
   <div>
     <div id="restaurantEntry">
       <h3>Add My Restaurant</h3>
-      <!-- <img :src="picURL" /> -->
       <div class="block">
         <label>Restaurant Name</label>
         <input type="text" v-model="restName" />
@@ -12,17 +11,21 @@
         <input type="text" v-model="restaddress" />
       </div>
       <div class="block">
+        <label>Zip Code</label>
+        <input type="text" v-model="restZip" />
+      </div>
+      <div class="block">
         <label>Phone Number</label>
-        <input type="text" v-model="restPhoneNumber" />
+        <input type="text" v-model="restPhoneNumber" placeholder="(XXX) XXX - XXXX"/>
       </div>
       <div class="block">
         <label>Cuisine</label>
         <input type="text" v-model="restCuisine" />
       </div>
-      <div class="block">
+      <!-- <div class="block">
         <label>Picture URL</label>
         <input type="text" v-model="restPicture" />
-      </div>
+      </div> -->
       <button v-on:click="addRestaurant" class="btn btn-outline-success  my-sm-0">Add</button>
     </div>
   </div>
@@ -39,18 +42,19 @@ export default class MyRestaurant extends Vue {
   readonly $appDB!: FirebaseFirestore;
   private restName = "";
   private restaddress = "";
+  private restZip = '';
   private restPhoneNumber = "";
   private restCuisine = "";
   private restPicture = "";
-  private picURL = "https://picsum.photos/400/300";
 
   addRestaurant(): void {
     this.$appDB.collection(`restaurants`).add({
       name: this.restName,
       address: this.restaddress,
+      zip: this.restZip,
       phone: this.restPhoneNumber,
-      cuisine: this.restCuisine,
-      picture: this.restPicture,
+      cuisine: this.restCuisine
+      // picture: this.restPicture,
     });
   }
 }

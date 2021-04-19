@@ -1,26 +1,101 @@
 <template>
-  <div>
-    <div>
-      <div>
-        <div class="form-inline">
-          <input
-            v-model="search"
-            type=""
-            id="searchRest"
-            placeholder="Enter restaurant name or cuisine type..."
-            class="form-control mr-sm-2"
-            @keyup.enter="searchRest()"
-          /><button v-on:click="searchRest()" class="btn btn-outline-success  my-sm-0" type='button'>Search</button>
-        </div>
+  <div id="featured-restaurants">
+    <h1>Find a Restaurant Near Me</h1>
+    <div id="zipSearch" class="form-inline">
+      <input
+        type="input"
+        v-model="userSearch"
+        placeholder="Enter Your Zipcode..."
+        id="findRes"
+        class="form-control mr-sm-2"
+        @keyup.enter="findRestaurant()"
+      />
+      <button
+        type="button"
+        id="findRestaurant"
+        class="btn btn-outline-success  my-sm-0"
+        v-on:click="findRestaurant()"
+      >
+        Search
+      </button>
+    </div>
+    <br />
+    <br />
+    <div class="form-inline" v-if="showFilter" id="filter">
+      <input
+        v-model="search"
+        
+        type=""
+        id="filterSearch"
+        placeholder="Enter restaurant name or cuisine type..."
+        class="form-control mr-sm-2"
+        @keyup.enter="searchRest()"
+      /><button
+        v-on:click="searchRest()"
+        class="btn btn-outline-success  my-sm-0"
+        type="button"
+      >
+        Search
+      </button>
+    </div>
+    <div id="Cards" v-for="(z, pos) in allRestaurants" :key="pos">
+      <div id="results">
+        <h4>{{ z.name }}</h4>
+        <h5>Phone Number: {{ z.phone }}</h5>
+        <h5>Address: {{ z.address }}</h5>
+        <button
+          type="button"
+          class="btn btn-outline-success  my-sm-0"
+          id="markAsFavorite"
+          v-on:click="markAsFavorite()"
+        >
+          Mark As Favorite
+        </button>
+        <button
+          type="button"
+          id="makeReservation"
+          v-on:click="makeReservation(z.name)"
+          class="btn btn-outline-success  my-sm-0"
+        >
+          Make Reservation
+        </button>
       </div>
-      <div id="restCards" v-for="(z, pos) in restaurants" :key="pos">
-        <img :src="z.picture" alt="" style="width:300px;height:200px;" />
-        <div id="restInfo">
-          <h2>{{ z.name }}</h2>
-          <h4>Address: {{ z.address }}</h4>
-          <h4>Phone Number: {{ z.phone }}</h4>
-          <h4>Cuisine: {{ z.cuisine }}</h4>
+      <div id="reservation" v-if="showRes == z.name">
+        <h5>Current Reservations:</h5>
+        <div v-for="(y, pos) in allReservations" :key="pos">
+          <p v-if="checkLoc(z.street, y.resLocation)">
+            Date: {{ y.resDate }} Time: {{ y.resTime }} Diners:
+            {{ y.numDiners }}
+          </p>
         </div>
+
+        <h5>Reserve A Table:</h5>
+        <input
+          type="input"
+          v-model="resDate"
+          class="form-control mr-sm-2"
+          placeholder="Enter Date (Month/Day/Year)"
+        />
+        <input
+          type="input"
+          v-model="resTime"
+          class="form-control mr-sm-2"
+          placeholder="Enter Desired Time"
+        />
+        <input
+          type="input"
+          v-model="resNum"
+          class="form-control mr-sm-2"
+          placeholder="Enter Number of Diners"
+        />
+        <button
+          type="button"
+          id="submitReservation"
+          v-on:click="submitReservation(z.address.street)"
+          class="btn btn-outline-success  my-sm-0"
+        >
+          Submit Reservation
+        </button>
       </div>
     </div>
   </div>
@@ -30,47 +105,158 @@
 import { Component, Vue } from "vue-property-decorator";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import axios from "axios";
+import { AxiosResponse } from "axios";
 import { FirebaseAuth } from "@firebase/auth-types";
 import {
   FirebaseFirestore,
   QueryDocumentSnapshot,
   QuerySnapshot,
 } from "@firebase/firestore-types";
+
+interface Restaurant {
+  name: string;
+  address: string;
+  zip: string;
+  phone: string;
+  cuisine: string;
+}
+
 @Component
 export default class Home extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;
   readonly $router!: any;
+  private restaurantData: Restaurant[] = [];
+  private userSearch = "";
+  private showRes = "";
+  private resDate = "";
+  private resTime = "";
+  private resNum = "";
+  private allReservations: any[] = [];
+  private uid = "none";
+  private userFavorites: any[] = [];
   private restaurants: any[] = [];
   private holdingArray: any[] = [];
   private search = "";
+  private allRestaurants: any[] = [];
+  private showFilter = false;
 
+  makeReservation(name: string): void {
+    if (this.showRes == "") {
+      this.showRes = name;
+    } else {
+      this.showRes = "";
+    }
+  }
+
+  checkArray(): boolean {
+      if(this.allRestaurants[0] != undefined){
+          return true;
+      }
+      return false;
+  }
+
+    //FILTERS
   searchRest(): void {
     var formInput = this.search;
     var newArray: any[] = [];
     if (this.holdingArray[0] != null) {
-      this.restaurants = [...this.holdingArray];
+      this.allRestaurants = [...this.holdingArray];
     } else {
-      this.holdingArray = [...this.restaurants];
+      this.holdingArray = [...this.allRestaurants];
     }
     if (formInput != "") {
-      this.restaurants.forEach((element) => {
+      this.allRestaurants.forEach((element) => {
         if (
           element.name.toUpperCase() == formInput.toUpperCase() ||
           element.cuisine.toUpperCase() == formInput.toUpperCase()
         ) {
           newArray.push(element);
         }
-        this.restaurants = newArray;
+        this.allRestaurants = newArray;
       });
     } else {
-      this.restaurants = [...this.holdingArray];
+      this.allRestaurants = [...this.holdingArray];
     }
   }
 
-  mounted(): void {
-      
+  submitReservation(address: string): void {
+    this.$appDB.collection(`reservations`).add({
+      resLocation: address,
+      reservationTime: this.resTime,
+      numDiners: this.resNum,
+      resDate: this.resDate,
+    });
 
+    this.resDate = "";
+    this.resTime = "";
+    this.resNum = "";
+  }
+
+  checkLoc(a: string, b: string): boolean {
+    if (a === b) {
+      return true;
+    }
+    return false;
+  }
+
+    //GET RESTAURANTS FROM API
+  findRestaurant() {
+    var url =
+      "https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/" +
+      this.userSearch;
+    axios
+      .get(url, {
+        params: { page: "1", zipcode: this.userSearch },
+        headers: {
+          "x-rapidapi-key":
+            "f9aad7740emsh7bd03e23dc92856p1d233bjsn098eae4d44ca",
+          "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
+        },
+      })
+      .then((r: AxiosResponse) => {
+          
+        this.restaurantData = r.data.result.data.map(
+            (x: any): Restaurant => {
+                return {
+                    name: x.restaurant_name,
+                    address: x.address.street,
+                    zip: x.postal_code,
+                    phone: x.restaurant_phone,
+                    cuisine: x.cuisines[0]
+                }
+            }
+        )
+        
+        this.allRestaurants.splice(0);
+        for (const [key, value] of Object.entries(this.restaurantData)) {
+            this.allRestaurants.push({ restaurant: key, ...value });
+        }
+
+        this.restaurants.forEach(element => {
+            if(element.zip == '49504'){
+                this.allRestaurants.push(element);
+            }
+        })
+
+        this.allRestaurants.forEach(element => {
+            if(element.cuisine == undefined){
+                element.cuisine = "N/A"
+            }
+        })
+        
+      });
+
+      console.log(this.allRestaurants)
+      this.showFilter = true;
+  }
+
+  mounted(): void {
+    this.showFilter = false;
+    this.uid = this.$appAuth.currentUser?.uid ?? "none";
+    console.log(this.allRestaurants[0])
+    //GET USER CREATED RESTAURANTS
     this.$appDB
       .collection("restaurants")
       .orderBy("name")
@@ -83,41 +269,74 @@ export default class Home extends Vue {
               name: restData.name,
               cuisine: restData.cuisine,
               address: restData.address,
+              zip: restData.zip,
               phone: restData.phone,
-              picture: restData.picture,
+            //   picture: restData.picture,
             });
           }
         });
       });
 
-      
+    //GET USER CREATED RESERVATIONS
+    this.$appDB.collection("reservations").onSnapshot((qs: QuerySnapshot) => {
+      this.allReservations.splice(0);
+      qs.forEach((qds: QueryDocumentSnapshot) => {
+        if (qds.exists) {
+          const resData = qds.data();
+          this.allReservations.push({
+            resLocation: resData.resLocation,
+            numDiners: resData.numDiners,
+            resTime: resData.reservationTime,
+            resDate: resData.resDate,
+          });
+        }
+      });
+    });
+
+    this.restaurants.forEach((element) => {
+      this.restaurantData.push(element);
+    });
+
+    // console.log(this.restaurants);
   }
 }
 </script>
 
 <style>
-#restCards {
+#Cards {
   margin: 1em;
   display: inline-block;
   flex-direction: column;
+  border: solid;
+  border-radius: 1em;
+  padding: 1em;
 }
 
-#restCards h3 {
-  text-align: left;
-}
-
-#restInfo {
-  text-align: left;
-}
-
-img {
-  vertical-align: middle;
-}
-
-#searchRest {
-  width: 30%;
-
-  margin-left: 35%;
+/* #findRes{
+    width:22%;
+    margin-left: 35%;
   margin-right: .25em;
+} */
+
+#zipSearch {
+  display: flex;
+  justify-content: center;
+}
+
+#featured-restaurants button {
+  margin: 0.25em;
+}
+
+#reservation input :not(#findRes) {
+  margin: 2em;
+}
+
+#filter{
+    margin: 1em;
+}
+
+#filterSearch{
+    width: 30%;
+    margin-left: 1.5em;
 }
 </style>
