@@ -1,60 +1,30 @@
 <template>
     <div id="MyProfile">
         <h1>My Profile</h1>
-        <div id="my-reservations">
-            <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">My Reservations</h5>
-                <h6 class="card-subtitle mb-2 text-muted">View or Change Your Current Reservation(s)</h6>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date:</th>
-                            <th>Time:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(z,pos) in reservations" :key="pos">
-                            <td>{{z.date}}</td>
-                            <td>${{z.time}}</td>
-                        </tr>
-                    </tbody>
+            <div id="my-reservations" v-for="(z,pos) in reservations" :key="pos">
+                <h2>My Reservations</h2>
+                    <p>{{z.date}}</p>
+                    <p>${{z.time}}</p>
                     <br/>
-                    <label>My Favorite Cuisines</label>
-        <br/>
-            <div id="checkboxes">
-                <input type="checkbox" id="food1" name="food1" value="Mexican">
-                <label for="food1"> Mexican</label><br>
-                <input type="checkbox" id="food2" name="food2" value="Chinese">
-                <label for="food2"> Chinese</label><br>
-                <input type="checkbox" id="food3" name="food3" value="Italian">
-                <label for="food3"> Italian</label><br>
-                <input type="checkbox" id="food4" name="food4" value="Greek">
-                <label for="food4"> Greek</label><br>
-                <input type="checkbox" id="food5" name="food5" value="Italian">
-                <label for="food5"> Indian</label><br>
+                    <button type="button" id="cancelReservation" v-on:click="cancelReservation()">Cancel Reservation</button>
             </div>
-                <button type="button" id="cancelReservation" v-on:click="cancelReservation()">Cancel Reservation</button>
-                </table>
+            <div id="account-details" v-for="(z, pos) in profileInfo" :key="pos">
+                <h3>My Account Details</h3>
+                <button type="button" id="edit" v-on:click="edit">Edit My Account</button>
+                <br/>
+                <label>First Name:</label>
+                {{z.firstName}}
+                <br/>
+                <label>Last Name:</label>
+                {{z.lastName}}
+                <br/>
+                <label>Phone Number:</label>
+                {{z.phone}}
+                <br/>
+                <label>Need to Change Your Password?</label>
+                <br/>
+                <button type="button" id="changePassword" v-on:click="changePassword()">Change Password</button>
             </div>
-        </div>
-            
-        </div>
-        <div id="account-details">
-            <h3>My Account Details</h3>
-            <button type="button" id="edit" v-on:click="edit">Edit My Account</button>
-            <br/>
-            <label>Name:</label>
-            <br/>
-            <label>Email:</label>
-            <br/>
-            <label>Phone Number:</label>
-            <br/>
-            <label>Need to Change Your Password?</label>
-            <br/>
-            <button type="button" id="changePassword" v-on:click="changePassword()">Change Password</button>
-            
-        </div>
 
         
     </div>
@@ -64,6 +34,12 @@
 import { Component, Vue } from 'vue-property-decorator';
 import App from './components/App.vue';
 import { FirebaseAuth, UserCredential } from "@firebase/auth-types";
+import {
+  FirebaseFirestore,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+} from "@firebase/firestore-types";
+
 
 @Component({
   components: {
@@ -72,12 +48,33 @@ import { FirebaseAuth, UserCredential } from "@firebase/auth-types";
 export default class MyProfile extends Vue {
   
     readonly $appAuth!: FirebaseAuth;
-    private uid = "none"
+    private uid = "none";
+    readonly $router!: any;
+    readonly $appDB!: FirebaseFirestore;
+    private profileInfo: any[] = [];
 
     edit(): void {
         this.$router.push({ path: "/EditAccountDetails" });
         // or equivalently
         this.$router.push({ name: "EditAccountDetails" });
+    }
+
+    mounted(): void {
+        this.uid = this.$appAuth.currentUser?.uid ?? "none";
+        this.$appDB.collection(`users/${this.uid}/profile-information`)
+        .onSnapshot((qs: QuerySnapshot) => {
+        this.profileInfo.splice(0);
+        qs.forEach((qds: QueryDocumentSnapshot) => {
+          if (qds.exists) {
+            const userData = qds.data();
+            this.profileInfo.push({
+              firstName: userData.firstName,
+              lastName: userData.lastName,
+              phone: userData.phone
+            });
+          }
+        });
+      });
     }
 
 }

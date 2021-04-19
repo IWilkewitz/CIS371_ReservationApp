@@ -36,6 +36,7 @@ import {
 export default class Home extends Vue {
     readonly $appDB!: FirebaseFirestore;
     readonly $appAuth!: FirebaseAuth;
+    private uid = "none";
     readonly $router!: any;
     private accountDetails: any[] = [];
     private firstName = "";
@@ -43,13 +44,19 @@ export default class Home extends Vue {
     private phoneNumber = "";
 
 
+    mounted(): void {
+        this.uid = this.$appAuth.currentUser?.uid ?? "none";
+    }
+
     editAccountDetails(): void {
-    this.$appDB.collection(`users`).add({
-      firstName: this.firstName,
-      lastName: this.lastName,
-      phone: this.phoneNumber,
-    });
-  }
+        this.$appDB.collection(`users/${this.uid}/profile-information`).add({
+            firstName: this.firstName,
+            lastName: this.lastName,
+            phone: this.phoneNumber,
+        })
+
+    }
+  
 
   back(): void {
       this.$router.push({ path: "/MyProfile" });

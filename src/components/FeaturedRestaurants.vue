@@ -80,6 +80,11 @@ export default class FeaturedRestaurants extends Vue {
   private resTime = '';
   private resNum = '';
   private allReservations: any[] = [];
+    private uid = "none"
+    private userFavorites: any[] = [];
+
+    
+        
 
   makeReservation(name: string): void {
     if (this.showRes == "") {
@@ -124,6 +129,8 @@ export default class FeaturedRestaurants extends Vue {
   }
 
   mounted(): void {
+      this.uid = this.$appAuth.currentUser?.uid ?? "none";
+    
       this.$appDB
       .collection("reservations")
       .onSnapshot((qs: QuerySnapshot) => {
@@ -139,9 +146,8 @@ export default class FeaturedRestaurants extends Vue {
           }
         });
       });
+    }
 
-      console.log(this.allReservations)
-  }
 }
 </script>
 
