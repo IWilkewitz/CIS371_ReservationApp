@@ -1,14 +1,19 @@
 <template>
   <div id="featured-restaurants">
     <h1>Find a Restaurant Near Me</h1>
+    <div id="zipSearch" class="form-inline">
     <input
       type="input"
       v-model="userSearch"
       placeholder="Enter Your Zipcode..."
+      id="findRes"
+      class="form-control mr-sm-2"
+      @keyup.enter="findRestaurant()"
     />
-    <button type="button" id="findRestaurant" v-on:click="findRestaurant()">
+    <button type="button" id="findRestaurant" class="btn btn-outline-success  my-sm-0" v-on:click="findRestaurant()">
       Search
     </button>
+    </div>
     <br />
     <br />
     <div id="Cards" v-for="(z, pos) in restaurantData" :key="pos">
@@ -16,13 +21,14 @@
         <h4>{{ z.restaurant_name }}</h4>
         <h5>Phone Number: {{ z.restaurant_phone }}</h5>
         <h5>Address: {{ z.address.street }}</h5>
-        <button type="button" id="markAsFavorite" v-on:click="markAsFavorite()">
+        <button type="button" class="btn btn-outline-success  my-sm-0" id="markAsFavorite" v-on:click="markAsFavorite()">
           Mark As Favorite
         </button>
         <button
           type="button"
           id="makeReservation"
           v-on:click="makeReservation(z.restaurant_name)"
+          class="btn btn-outline-success  my-sm-0"
         >
           Make Reservation
         </button>
@@ -30,16 +36,18 @@
       <div id="reservation" v-if="showRes == z.restaurant_name">
         <h5>Current Reservations:</h5>
             <div v-for="(y, pos) in allReservations" :key="pos">
-                <p v-if="checkLoc(z.address.street, y.resLocation)">Time: {{y.resTime}} Diners: {{y.numDiners}}</p>
+                <p v-if="checkLoc(z.address.street, y.resLocation)">Date: {{y.resDate}} Time: {{y.resTime}} Diners: {{y.numDiners}}</p>
             </div>
         
         <h5>Reserve A Table:</h5>
-        <input type="input" v-model="resTime" placeholder="Enter Desired Time" />
-        <input type="input" v-model="resNum" placeholder="Enter Number of Diners" />
+        <input type="input" v-model="resDate" class="form-control mr-sm-2" placeholder="Enter Date (Month/Day/Year)" />
+        <input type="input" v-model="resTime" class="form-control mr-sm-2" placeholder="Enter Desired Time" />
+        <input type="input" v-model="resNum" class="form-control mr-sm-2" placeholder="Enter Number of Diners" />
         <button
           type="button"
           id="submitReservation"
           v-on:click="submitReservation(z.address.street)"
+          class="btn btn-outline-success  my-sm-0"
         >
           Submit Reservation
         </button>
@@ -77,6 +85,7 @@ export default class FeaturedRestaurants extends Vue {
   private restaurantData: Restaurant[] = [];
   private userSearch = "";
   private showRes = "";
+  private resDate = '';
   private resTime = '';
   private resNum = '';
   private allReservations: any[] = [];
@@ -98,8 +107,13 @@ export default class FeaturedRestaurants extends Vue {
       this.$appDB.collection(`reservations`).add({
           resLocation: address,
           reservationTime: this.resTime,
-          numDiners: this.resNum
+          numDiners: this.resNum,
+          resDate: this.resDate
     });
+
+    this.resDate = "";
+    this.resTime = "";
+    this.resNum = "";
   }
 
   checkLoc(a: string, b: string): boolean {
@@ -141,7 +155,8 @@ export default class FeaturedRestaurants extends Vue {
             this.allReservations.push({
               resLocation: resData.resLocation,
               numDiners: resData.numDiners,
-              resTime: resData.reservationTime
+              resTime: resData.reservationTime,
+              resDate: resData.resDate
             });
           }
         });
@@ -158,5 +173,25 @@ export default class FeaturedRestaurants extends Vue {
   flex-direction: column;
   border: solid;
   border-radius: 1em;
+  padding: 1em;
+}
+
+/* #findRes{
+    width:22%;
+    margin-left: 35%;
+  margin-right: .25em;
+} */
+
+#zipSearch {
+    display: flex;
+    justify-content: center;
+}
+
+#featured-restaurants button{
+    margin: .25em;
+}
+
+#reservation input :not(#findRes){
+    margin: 2em;
 }
 </style>
