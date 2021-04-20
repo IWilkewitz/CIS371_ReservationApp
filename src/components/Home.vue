@@ -54,16 +54,16 @@
         <button
           type="button"
           id="makeReservation"
-          v-on:click="makeReservation(z.name)"
+          v-on:click="makeReservation(z.address)"
           class="btn btn-outline-success  my-sm-0"
         >
           Make Reservation
         </button>
       </div>
-      <div id="reservation" v-if="showRes == z.name">
+      <div id="reservation" v-if="showRes == z.address">
         <h5>Current Reservations:</h5>
         <div v-for="(y, pos) in allReservations" :key="pos">
-          <p v-if="checkLoc(z.street, y.resLocation)">
+          <p v-if="checkLoc(z.address, y.resLocation)">
             Date: {{ y.resDate }} Time: {{ y.resTime }} Diners:
             {{ y.numDiners }}
           </p>
@@ -91,7 +91,7 @@
         <button
           type="button"
           id="submitReservation"
-          v-on:click="submitReservation(z.address.street)"
+          v-on:click="submitReservation(z.address)"
           class="btn btn-outline-success  my-sm-0"
         >
           Submit Reservation
