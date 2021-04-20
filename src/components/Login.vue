@@ -22,11 +22,14 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { FirebaseAuth, UserCredential } from "@firebase/auth-types";
+import { FirebaseFirestore } from "@firebase/firestore-types";
 
 @Component
 
 export default class Login extends Vue {
 
+    readonly $appDB!: FirebaseFirestore;
+    private uid = "none";
     readonly $appAuth!: FirebaseAuth;
     private userEmail = "";
     private userPassword = "";
@@ -37,6 +40,12 @@ export default class Login extends Vue {
     }
 
     createAccount(): void {
+    this.$appDB.collection(`users/${this.uid}/profile-information`).add({
+            email: this.userEmail,
+            password: this.userPassword,
+        })
+
+
     this.$appAuth
         .createUserWithEmailAndPassword(this.userEmail, this.userPassword)
         .then((u: UserCredential) => {
@@ -46,9 +55,9 @@ export default class Login extends Vue {
         this.showMessage(`Unable to create account ${err}`);
         });    
         // In createAccount()
-        this.$router.push({ path: "/Home" });
+        this.$router.push({ path: "/EditAccountDetails" });
         // or equivalently
-        this.$router.push({ name: "Home" });
+        this.$router.push({ name: "EditAccountDetails" });
     }
 
     authenticate(): void {
