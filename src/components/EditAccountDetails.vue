@@ -46,6 +46,7 @@ export default class Home extends Vue {
 
     mounted(): void {
         this.uid = this.$appAuth.currentUser?.uid ?? "none";
+        console.log(this.uid)
     }
 
     editAccountDetails(): void {

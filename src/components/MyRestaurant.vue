@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 import { FirebaseFirestore } from "@firebase/firestore-types";
 import { QueryDocumentSnapshot } from "@firebase/firestore-types";
 import { QuerySnapshot } from "@firebase/firestore-types";
@@ -40,12 +40,18 @@ import { FirebaseAuth } from "@firebase/auth-types";
 @Component
 export default class MyRestaurant extends Vue {
   readonly $appDB!: FirebaseFirestore;
+  readonly $appAuth!: FirebaseAuth;
   private restName = "";
   private restaddress = "";
   private restZip = '';
   private restPhoneNumber = "";
   private restCuisine = "";
   private restPicture = "";
+  private uid = "none";
+  
+
+ 
+
 
   addRestaurant(): void {
     this.$appDB.collection(`restaurants`).add({
@@ -56,6 +62,11 @@ export default class MyRestaurant extends Vue {
       cuisine: this.restCuisine
       // picture: this.restPicture,
     });
+  }
+
+  mounted(): void {
+    this.uid = this.$appAuth.currentUser?.uid ?? "none";
+    console.log(this.uid)
   }
 }
 </script>

@@ -17,18 +17,18 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/"
-              >Home <span class="sr-only">(current)</span></a
+            <h6 class="nav-link" v-on:click="gotoHome"
+              >Home <span class="sr-only">(current)</span></h6
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="MyRestaurant">Add My Restaurant</a>
+            <h6 class="nav-link" v-on:click="gotoMyRest" id="addRest">Add My Restaurant</h6>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="FeaturedRestaurants">Find Restaurant</a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="MyProfile">My Profile</a>
+            <h6 class="nav-link" v-on:click="gotoMyProfile" id="myProf">My Profile</h6>
           </li>
         </ul>
         <!-- <form class="form-inline my-2 my-lg-0">
@@ -49,9 +49,10 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             
-            <a class="nav-link" href="Login"
+            <a class="nav-link" href="Login" v-if="notLoggedIn()"
               >Sign In <span class="sr-only">(current)</span></a
             >
+            <a class="nav-link" v-if="userLoggedIn()" v-on:click="doLogout">Logout</a>
           </li>
         </ul>
       </div>
@@ -98,7 +99,23 @@ export default class App extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;
   readonly $router!: any;
+  private uid= "";
   
+  notLoggedIn(): boolean {
+    return this.$appAuth.currentUser?.uid == undefined;
+  }
+
+  gotoMyRest(): void {
+    this.$router.push({ path: "/MyRestaurant" });
+  }
+
+  gotoMyProfile(): void {
+    this.$router.push({ path: "/MyProfile" });
+  }
+
+  gotoHome(): void {
+    this.$router.push({ path: "/" });
+  }
 
   userLoggedIn(): boolean {
     return this.$appAuth.currentUser?.uid !== undefined;
@@ -108,6 +125,12 @@ export default class App extends Vue {
     this.$appAuth.signOut();
     this.$router.back(); // Go backward in the "history stack"
   }
+
+  mounted(): void {
+    this.uid = this.$appAuth.currentUser?.uid ?? "none";
+        console.log(this.uid)
+  }
+
 }
 </script>
 
@@ -119,5 +142,9 @@ export default class App extends Vue {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.nav-link:hover{
+  cursor:pointer;
 }
 </style>
