@@ -24,6 +24,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { FirebaseAuth, UserCredential } from "@firebase/auth-types";
+import { FirebaseFirestore } from "@firebase/firestore-types";
 
 @Component
 export default class Login extends Vue {
