@@ -62,9 +62,7 @@
       <h6>By: Erin Long, Jon Rabideau, and Ian Wilkewitz</h6> -->
       <router-view></router-view>
     </div>
-    <div id="logout">
-      <button v-if="userLoggedIn()">Logout</button>
-    </div>
+   
    
   </div>
 </template>

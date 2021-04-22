@@ -203,6 +203,8 @@ export default class Home extends Vue {
 
     //GET RESTAURANTS FROM API
   findRestaurant() {
+    this.holdingArray = [];
+    this.search = '';
     var url =
       "https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/" +
       this.userSearch;
@@ -235,10 +237,13 @@ export default class Home extends Vue {
         }
 
         this.restaurants.forEach(element => {
-            if(element.zip == '49504'){
+            if(element.zip == this.userSearch){
                 this.allRestaurants.push(element);
             }
+            //console.log(element.zip)
+            console.log(this.search)
         })
+        
 
         this.allRestaurants.forEach(element => {
             if(element.cuisine == undefined){
@@ -255,7 +260,7 @@ export default class Home extends Vue {
   mounted(): void {
     this.showFilter = false;
     this.uid = this.$appAuth.currentUser?.uid ?? "none";
-    console.log(this.uid)
+    //console.log(this.uid)
     //GET USER CREATED RESTAURANTS
     this.$appDB
       .collection("restaurants")
