@@ -47,6 +47,7 @@
           type="button"
           class="btn btn-outline-success  my-sm-0"
           id="markAsFavorite"
+          v-if="userLoggedIn()"
           v-on:click="markAsFavorite()"
         >
           Mark As Favorite
@@ -54,6 +55,7 @@
         <button
           type="button"
           id="makeReservation"
+          v-if="userLoggedIn()"
           v-on:click="makeReservation(z.address)"
           class="btn btn-outline-success  my-sm-0"
         >
@@ -148,6 +150,10 @@ export default class Home extends Vue {
     } else {
       this.showRes = "";
     }
+  }
+
+  userLoggedIn(): boolean {
+    return this.$appAuth.currentUser?.uid !== undefined;
   }
 
   checkArray(): boolean {
@@ -342,6 +348,6 @@ export default class Home extends Vue {
 
 #filterSearch{
     width: 30%;
-    margin-left: 1.5em;
+    margin-left: 4.5em;
 }
 </style>

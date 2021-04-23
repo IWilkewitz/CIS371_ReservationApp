@@ -22,13 +22,13 @@
             >
           </li>
           <li class="nav-item">
-            <h6 class="nav-link" v-on:click="gotoMyRest" id="addRest">Add My Restaurant</h6>
+            <h6 class="nav-link" v-if="userLoggedIn()" v-on:click="gotoMyRest" id="addRest">Add My Restaurant</h6>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="FeaturedRestaurants">Find Restaurant</a>
           </li> -->
           <li class="nav-item">
-            <h6 class="nav-link" v-on:click="gotoMyProfile" id="myProf">My Profile</h6>
+            <h6 class="nav-link" v-if="userLoggedIn()" v-on:click="gotoMyProfile" id="myProf">My Profile</h6>
           </li>
         </ul>
         <!-- <form class="form-inline my-2 my-lg-0">
@@ -121,7 +121,7 @@ export default class App extends Vue {
 
   doLogout(): void {
     this.$appAuth.signOut();
-    this.$router.back(); // Go backward in the "history stack"
+    this.$router.push({ path: "/Login" }); // Go backward in the "history stack"
   }
 
   mounted(): void {
