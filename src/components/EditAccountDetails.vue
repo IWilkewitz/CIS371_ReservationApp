@@ -51,15 +51,13 @@ export default class Home extends Vue {
 
     editAccountDetails(): void {
         
-        this.$appDB.collection('users').doc(this.uid).collection('profile-information').doc('info').set({
+        this.$appDB.collection('users').doc(this.uid).collection('profile-information').doc('info').update({
             firstName: this.firstName,
             lastName: this.lastName,
             phone: this.phoneNumber,
         });
 
-        this.$appDB.collection('users').doc(this.uid).update({
-            
-        })
+        
 
     }
   

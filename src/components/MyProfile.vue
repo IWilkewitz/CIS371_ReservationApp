@@ -62,13 +62,7 @@ export default class MyProfile extends Vue {
     mounted(): void {
         console.log(this.$appDB.collection('users').doc(this.uid).collection('profile-information').doc('info'))
 
-        if(this.$appDB.collection('users').doc(this.uid).collection('profile-information').doc('info') == undefined){
-        this.$appDB.collection('users').doc(this.uid).collection('profile-information').doc('info').set({
-            firstName: '',
-            lastName: '',
-            phone: '',
-        });
-      }
+        
 
         this.uid = this.$appAuth.currentUser?.uid ?? "none";
         this.$appDB.collection(`users/${this.uid}/profile-information`)
@@ -78,9 +72,9 @@ export default class MyProfile extends Vue {
           if (qds.exists) {
             const userData = qds.data();
             this.profileInfo.push({
-              firstName: userData.info.firstName,
-              lastName: userData.info.lastName,
-              phone: userData.info.phone
+              firstName: userData.firstName,
+              lastName: userData.lastName,
+              phone: userData.phone
             });
           }
         });

@@ -33,6 +33,7 @@ export default class Login extends Vue {
   private userPassword = "";
   private message = "";
    readonly $router!: any;
+   readonly $appDB!: FirebaseFirestore;
 
   get noInput(): boolean {
     return this.userEmail.length === 0 || this.userPassword.length === 0;
@@ -43,10 +44,17 @@ export default class Login extends Vue {
       .createUserWithEmailAndPassword(this.userEmail, this.userPassword)
       .then((u: UserCredential) => {
         this.showMessage(`User create UID ${u.user?.uid}`);
+        this.$appDB.collection('users').doc(u.user?.uid).collection('profile-information').doc('info').set({
+            firstName: '',
+            lastName: '',
+            phone: '',
+        });
       })
       .catch((err: any) => {
         this.showMessage(`Unable to create account ${err}`);
       });
+
+      
     // In createAccount()
     //this.$router.push({ path: "/Home" });
     // or equivalently
