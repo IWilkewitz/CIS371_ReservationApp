@@ -44,10 +44,18 @@ export default class Login extends Vue {
       .createUserWithEmailAndPassword(this.userEmail, this.userPassword)
       .then((u: UserCredential) => {
         this.showMessage(`User create UID ${u.user?.uid}`);
+        //THIS CREATES BLANK PROFILE TO BE UPDATED LATER
         this.$appDB.collection('users').doc(u.user?.uid).collection('profile-information').doc('info').set({
             firstName: '',
             lastName: '',
             phone: '',
+        });
+        //THIS CREATES BLANK RES SHEET TO BE UPDATED LATER
+        this.$appDB.collection('users').doc(u.user?.uid).collection('res-information').doc('reservations').set({
+            restaurantName: '',
+            date: '',
+            time: '',
+            numDiners: ''
         });
       })
       .catch((err: any) => {

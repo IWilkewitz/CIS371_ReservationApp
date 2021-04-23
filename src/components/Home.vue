@@ -93,7 +93,7 @@
         <button
           type="button"
           id="submitReservation"
-          v-on:click="submitReservation(z.address)"
+          v-on:click="submitReservation(z.address, z.name)"
           class="btn btn-outline-success  my-sm-0"
         >
           Submit Reservation
@@ -187,13 +187,21 @@ export default class Home extends Vue {
     }
   }
 
-  submitReservation(address: string): void {
+  submitReservation(address: string, name: string): void {
     this.$appDB.collection(`reservations`).add({
       resLocation: address,
       reservationTime: this.resTime,
       numDiners: this.resNum,
       resDate: this.resDate,
+      reservedBy: this.uid
     });
+
+    this.$appDB.collection('users').doc(this.uid).collection('res-information').doc('reservations').set({
+            restaurantName: name,
+            date: this.resDate,
+            time: this.resTime,
+            numDiners: this.resNum
+        });
 
     this.resDate = "";
     this.resTime = "";
