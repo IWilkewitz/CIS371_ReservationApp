@@ -39,7 +39,7 @@
                 {{z.phone}}
                 <br/>
                 <button type="button" id="edit" class="btn btn-outline-success  my-sm-0" v-on:click="edit">Edit My Account Details</button>
-                <button type="button" id="changePassword" class="btn btn-outline-success  my-sm-0" v-on:click="changePassword()">Change My Password</button>
+                <!-- <button type="button" id="changePassword" class="btn btn-outline-success  my-sm-0" v-on:click="changePassword()">Change My Password</button> -->
             </div>
           </div>
         </div>

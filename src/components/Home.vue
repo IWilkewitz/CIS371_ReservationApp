@@ -46,7 +46,7 @@
         <p>Phone Number: {{ z.phone }}</p>
         <p>Address: {{ z.address }}</p>
         <br/>
-        <button
+        <!-- <button
           type="button"
           class="btn btn-outline-success  my-sm-0"
           id="markAsFavorite"
@@ -54,7 +54,7 @@
           v-on:click="markAsFavorite()"
         >
           Mark As Favorite
-        </button>
+        </button> -->
         <button
           type="button"
           id="makeReservation"
