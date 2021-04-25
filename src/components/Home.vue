@@ -279,7 +279,7 @@ export default class Home extends Vue {
 
   mounted(): void {
     this.showFilter = false;
-    //this.uid = this.$appAuth.currentUser?.uid ?? "none";
+    this.uid = this.$appAuth.currentUser?.uid ?? "none";
     console.log(this.$appAuth.currentUser?.uid)
     //GET USER CREATED RESTAURANTS
     this.$appDB

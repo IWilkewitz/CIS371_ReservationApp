@@ -97,7 +97,7 @@ export default class App extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;
   readonly $router!: any;
-  //private uid= "";
+  private uid= "";
   
   notLoggedIn(): boolean {
     return this.$appAuth.currentUser?.uid == undefined;
@@ -126,7 +126,7 @@ export default class App extends Vue {
 
   mounted(): void {
     
-    //this.uid = this.$appAuth.currentUser?.uid ?? "none";
+    this.uid = this.$appAuth.currentUser?.uid ?? "none";
         //console.log(this.uid)
   }
 
