@@ -1,6 +1,7 @@
 <template>
   <div id="featured-restaurants">
-    <h1>Find a Restaurant Near Me</h1>
+    <h1>FIND A RESTAURANT</h1>
+    <p>Discover a restaurant near you by entering your zip code in the search bar below.</p>
     <div id="zipSearch" class="form-inline">
       <input
         type="input"
@@ -40,9 +41,11 @@
     </div>
     <div id="Cards" v-for="(z, pos) in allRestaurants" :key="pos">
       <div id="results">
-        <h4>{{ z.name }}</h4>
-        <h5>Phone Number: {{ z.phone }}</h5>
-        <h5>Address: {{ z.address }}</h5>
+        <h4>{{ z.name.toUpperCase() }}</h4>
+        <br/>
+        <p>Phone Number: {{ z.phone }}</p>
+        <p>Address: {{ z.address }}</p>
+        <br/>
         <button
           type="button"
           class="btn btn-outline-success  my-sm-0"
@@ -326,10 +329,38 @@ export default class Home extends Vue {
   margin: 1em;
   display: inline-block;
   flex-direction: column;
-  border: solid;
-  border-radius: 1em;
-  padding: 1em;
+  padding: 2em;
+  box-shadow: 7px 8px 7px -4px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background: mintcream
 }
+
+#results h4 {
+  font-weight: bolder;
+}
+
+
+#featured-restaurants h1 {
+  padding-top: 55px;
+  font-weight: bold;
+  color: darkgreen;
+  font-size: 50px;
+}
+
+
+#featured-restaurants p {
+  letter-spacing: 0.75px;
+  font-weight: lighter;
+  margin: 0;
+  
+}
+
+#featured-restaurants {
+  background-image: url('~@/assets/green_food.jpg');
+  background-size: cover;
+  padding-bottom:500px;
+}
+
 
 /* #findRes{
     width:22%;
@@ -352,10 +383,12 @@ export default class Home extends Vue {
 
 #filter{
     margin: 1em;
+    display: flex;
+    justify-content: center;
 }
 
 #filterSearch{
     width: 30%;
-    margin-left: 4.5em;
+  
 }
 </style>

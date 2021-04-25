@@ -1,8 +1,13 @@
 <template>
     <div id="MyProfile">
-        <h1>My Profile</h1>
+        <h1>MY PROFILE</h1>
+        <p>View your reservations and account information.</p>
+        <br/>
+        <br/>
+        <div class="grid-container">
             <div id="my-reservations" v-for="(z,pos) in resInfo" :key="pos">
                 <h3>My Reservations</h3>
+                <br/>
                 <label>Restaurant Name:</label>
                 {{z.restaurantName}}
                 <br/>
@@ -23,22 +28,19 @@
                 <h3>My Account Details</h3>
                 
                 <br/>
-                <label>First Name:</label>
+                <label>FIRST NAME:</label>
                 {{z.firstName}}
                 <br/>
-                <label>Last Name:</label>
+                <label>LAST NAME:</label>
                 {{z.lastName}}
                 <br/>
-                <label>Phone Number:</label>
+                <label>PHONE NUMBER:</label>
                 {{z.phone}}
                 <br/>
-                <button type="button" id="edit" class="btn btn-outline-success  my-sm-0" v-on:click="edit">Edit My Account</button>
-                <br/>
-                <br/>
-                <label>Need to Change Your Password?</label>
-                <br/>
-                <button type="button" id="changePassword" class="btn btn-outline-success  my-sm-0" v-on:click="changePassword()">Change Password</button>
+                <button type="button" id="edit" class="btn btn-outline-success  my-sm-0" v-on:click="edit">Edit My Account Details</button>
+                <button type="button" id="changePassword" class="btn btn-outline-success  my-sm-0" v-on:click="changePassword()">Change My Password</button>
             </div>
+          </div>
 
         
     </div>
@@ -125,23 +127,57 @@ export default class MyProfile extends Vue {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 25px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". my-reservations account-details ."
+    ". my-reservations account-details ."
+    ". . . .";
+}
+
+#MyProfile h3 {
+  letter-spacing: 0.75px;
+  font-weight: bold;
+  margin: 0;
+}
+
+#MyProfile label {
+  font-weight: bold
+}
+
+#MyProfile p {
+  letter-spacing: 0.75px;
+  font-weight: lighter;
+  margin: 0;
+}
+
+#MyProfile h1 {
+  margin-top: 25px;
+  font-weight: bold;
 }
 
 #my-reservations {
     display:inline-block;
-    border: 3px solid black;
-    border-radius: 1.5em;
     padding: 1em;
     text-align: left;
+    grid-area: my-reservations;
 }
 
 #account-details {
     display:inline-block;
-    border: 3px solid black;
-    border-radius: 1.5em;
     padding: 1em;
     text-align: left;
+    grid-area: account-details;
+}
+
+#account-details button {
+    margin: 0.25em;
 }
 
 

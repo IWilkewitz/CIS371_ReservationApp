@@ -2,18 +2,18 @@
   <div id="featured-restaurants">
     <h1>Find a Restaurant Near Me</h1>
     <div id="zipSearch" class="form-inline">
-    <input
-      type="input"
-      v-model="userSearch"
-      placeholder="Enter Your Zipcode..."
-      id="findRes"
-      class="form-control mr-sm-2"
-      @keyup.enter="findRestaurant()"
-    />
-    <button type="button" id="findRestaurant" class="btn btn-outline-success  my-sm-0" v-on:click="findRestaurant()">
-      Search
-    </button>
-    </div>
+        <input
+          type="input"
+          v-model="userSearch"
+          placeholder="Enter Your Zipcode..."
+          id="findRes"
+          class="form-control mr-sm-2"
+          @keyup.enter="findRestaurant()"
+        />
+        <button type="button" id="findRestaurant" class="btn btn-outline-success  my-sm-0" v-on:click="findRestaurant()">
+          Search
+        </button>
+      </div>
     <br />
     <br />
     <div id="Cards" v-for="(z, pos) in restaurantData" :key="pos">
@@ -167,14 +167,11 @@ export default class FeaturedRestaurants extends Vue {
 </script>
 
 <style>
-#Cards {
-  margin: 1em;
-  display: inline-block;
-  flex-direction: column;
-  border: solid;
-  border-radius: 1em;
-  padding: 1em;
-}
+
+
+
+
+
 
 /* #findRes{
     width:22%;
@@ -185,6 +182,11 @@ export default class FeaturedRestaurants extends Vue {
 #zipSearch {
     display: flex;
     justify-content: center;
+    margin-top: 25px;
+}
+
+#zipSearch input{
+  width: 20%;
 }
 
 #featured-restaurants button{

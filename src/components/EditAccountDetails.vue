@@ -1,19 +1,18 @@
 <template>
     <div id="edit-acccount-details">
         <div id="profile-information">
-            <h2>Edit Account Details</h2>
+            <h1>EDIT MY ACCOUNT DETAILS</h1>
             <div class="details">
                 <label>First Name:</label>
-                <input type="text" v-model="firstName" placeholder="First Name"/>
+                <input type="text" v-model="firstName" placeholder="Enter Your First Name..."/>
             </div>
             <div class="details">
                 <label>Last Name:</label>
-                <input type="text" v-model="lastName" placeholder="Last Name"/>
+                <input type="text" v-model="lastName" placeholder="Enter Your Last Name..."/>
             </div>
             <div class="details">
                 <label>Phone Number:</label>
-                <p>Please enter in the form of xxx-xxx-xxxx</p>
-                <input type="text" v-model="phoneNumber" placeholder="Phone Number"/>
+                <input type="text" v-model="phoneNumber" placeholder="(XXX) XXX - XXXX"/>
             </div>
             <button v-on:click="editAccountDetails">Save Changes</button>
             <button v-on:click="back">Back</button>
@@ -56,9 +55,6 @@ export default class Home extends Vue {
             lastName: this.lastName,
             phone: this.phoneNumber,
         });
-
-        
-
     }
   
 
@@ -74,13 +70,55 @@ export default class Home extends Vue {
 
 
 #profile-information {
-    display:inline-block;
-    padding: 1em;
-    text-align: left;
+    margin: auto;
+    width: 50%;
+    padding-top:25px;
+}
+
+#profile-information input {
+  float: right;
+  width: 50%;
+}
+
+#profile-information label {
+  text-align: left;
+  font-weight: bold;
+}
+
+#profile-information input::placeholder {
+  text-align: right;
+  letter-spacing: 0;
 }
 
 p {
     text-align: center;
 }
+
+#profile-information p {
+  text-align: left;
+}
+
+#profile-information h1 {
+  letter-spacing: 0.75px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+#profile-information button {
+  width: 65%;
+  border: 1px solid;
+  border-radius: 20px;
+  letter-spacing: 0.1rem;
+  padding: 0.5em;
+  font-size: 15px;
+  color: black;
+  outline: none;
+  background:gray;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
 
 </style>

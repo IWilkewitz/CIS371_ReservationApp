@@ -1,18 +1,20 @@
 <template>
   <div>
     <div id="restaurantEntry">
-      <h3>Add My Restaurant</h3>
+      <h1>ADD MY RESTAURANT</h1>
+      <br/>
+      <br/>
       <div class="block">
         <label>Restaurant Name</label>
-        <input type="text" v-model="restName" />
+        <input type="text" v-model="restName" placeholder="Enter Restaurant Name..." />
       </div>
       <div class="block">
         <label>Address</label>
-        <input type="text" v-model="restaddress" />
+        <input type="text" v-model="restaddress" placeholder="Enter Restaurant Address..." />
       </div>
       <div class="block">
         <label>Zip Code</label>
-        <input type="text" v-model="restZip" />
+        <input type="text" v-model="restZip" placeholder="Enter Zip Code..."/>
       </div>
       <div class="block">
         <label>Phone Number</label>
@@ -20,13 +22,15 @@
       </div>
       <div class="block">
         <label>Cuisine</label>
-        <input type="text" v-model="restCuisine" />
+        <input type="text" v-model="restCuisine" placeholder="Enter Cuisine Type..." />
       </div>
+      <br/>
+      <br/>
       <!-- <div class="block">
         <label>Picture URL</label>
         <input type="text" v-model="restPicture" />
       </div> -->
-      <button v-on:click="addRestaurant" class="btn btn-outline-success  my-sm-0">Add</button>
+      <button v-on:click="addRestaurant" class="btn btn-outline-success  my-sm-0">Add Restaurant</button>
     </div>
   </div>
 </template>
@@ -85,11 +89,24 @@ export default class MyRestaurant extends Vue {
 
 #restaurantEntry {
   margin: auto;
-  width: 18%;
+  width: 30%;
+  padding-top:25px;
 }
+
+#restaurantEntry h1 {
+  font-weight: bold;
+
+}
+
 
 #restaurantEntry input {
   float: right;
+  width: 70%;
+}
+
+#restaurantEntry input::placeholder {
+  text-align: right;
+  letter-spacing: 0;
 }
 
 </style>
