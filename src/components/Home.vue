@@ -342,7 +342,7 @@ export default class Home extends Vue {
 
 
 #featured-restaurants h1 {
-  padding-top: 55px;
+  padding-top: 100px;
   font-weight: bold;
   color: darkgreen;
   font-size: 50px;
@@ -359,7 +359,7 @@ export default class Home extends Vue {
 #featured-restaurants {
   background-image: url('~@/assets/green_food.jpg');
   background-size: cover;
-  padding-bottom:500px;
+  padding-bottom:550px;
 }
 
 

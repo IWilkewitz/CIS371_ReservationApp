@@ -109,7 +109,7 @@ export default class Login extends Vue {
   padding-right: 6em;
   display: inline-block;
   background: white;
-  margin-top:125px;
+  margin-top:200px;
   margin-left: 550px;
   box-shadow: 7px 7px 11px 0px rgba(0,0,0,0.5);
   
@@ -118,7 +118,7 @@ export default class Login extends Vue {
 #login {
   background-image: url('~@/assets/image_stockphoto.jpg');
   background-size: cover;
-  padding-bottom:150px;
+  padding-bottom:275px;
 }
 
 #user-login h3 {
@@ -149,7 +149,7 @@ export default class Login extends Vue {
 }
 
 #user-login input {
-  text-align: left;
+  text-align: center;
   padding: 0.75em;
   width: 75%;
   border: 1px solid #FF5963;
@@ -158,7 +158,7 @@ export default class Login extends Vue {
 }
 
 ::placeholder {
-  text-align: left;
+  text-align: center;
   letter-spacing: 0.1rem;
 }
 </style>

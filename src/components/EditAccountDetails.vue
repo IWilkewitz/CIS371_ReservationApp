@@ -1,22 +1,21 @@
 <template>
-    <div id="edit-acccount-details">
-        <div id="profile-information">
-            <h1>EDIT MY ACCOUNT DETAILS</h1>
-            <div class="details">
-                <label>First Name:</label>
-                <input type="text" v-model="firstName" placeholder="Enter Your First Name..."/>
+    <div id="details-container">
+        <div id="edit-acccount-details">
+            <div id="profile-information">
+                <h1>EDIT ACCOUNT</h1>
+                <div class="details">
+                    <input type="text" v-model="firstName" placeholder="First Name"/>
+                </div>
+                <div class="details">
+                    <input type="text" v-model="lastName" placeholder="Last Name"/>
+                </div>
+                <div class="details">
+                    <input type="text" v-model="phoneNumber" placeholder="Phone Number (XXX) XXX - XXXX"/>
+                </div>
+                <button v-on:click="editAccountDetails">Save Changes</button>
+                <button v-on:click="back">Back</button>
             </div>
-            <div class="details">
-                <label>Last Name:</label>
-                <input type="text" v-model="lastName" placeholder="Enter Your Last Name..."/>
-            </div>
-            <div class="details">
-                <label>Phone Number:</label>
-                <input type="text" v-model="phoneNumber" placeholder="(XXX) XXX - XXXX"/>
-            </div>
-            <button v-on:click="editAccountDetails">Save Changes</button>
-            <button v-on:click="back">Back</button>
-      </div>
+        </div>
     </div>
 </template>
 
@@ -72,22 +71,34 @@ export default class Home extends Vue {
 #profile-information {
     margin: auto;
     width: 50%;
-    padding-top:25px;
+    background: white;
+    padding-top: 3em;
+    padding-bottom: 3em;
+    padding-left: 6em;
+    padding-right: 6em;
+    box-shadow: 7px 7px 11px 0px rgba(0,0,0,0.5);
+    border-radius: 20px;
 }
+
 
 #profile-information input {
   float: right;
-  width: 50%;
+  width: 100%;
+  text-align: center;
+  padding: 0.75em;
+  border: 1px solid orange;
+  border-radius: 5px;
+  margin-bottom: 1em;
 }
 
 #profile-information label {
   text-align: left;
   font-weight: bold;
+  float: left;
 }
 
 #profile-information input::placeholder {
-  text-align: right;
-  letter-spacing: 0;
+  text-align: center;
 }
 
 p {
@@ -103,21 +114,30 @@ p {
   font-weight: bold;
   margin: 0;
   margin-bottom: 40px;
+  padding-top:75px;
+  font-size:50px;
+  color: orange;
 }
 
+
 #profile-information button {
-  width: 65%;
-  border: 1px solid;
+  width: 75%;
+  border: 1px solid lightgray;
   border-radius: 20px;
   letter-spacing: 0.1rem;
-  padding: 0.5em;
-  font-size: 15px;
-  color: black;
-  outline: none;
-  background:gray;
+  padding: 0.75em;
+  font-size: 16px;
   color: white;
+  outline: none;
+  background: orange;
   margin-top: 10px;
   margin-bottom: 2px;
+}
+
+#details-container {
+  background-image: url('~@/assets/food_plates.jpg');
+  background-size: cover;
+  padding-bottom:350px;
 }
 
 

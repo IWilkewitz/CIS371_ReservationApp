@@ -88,11 +88,18 @@ export default class MyRestaurant extends Vue {
   margin: auto;
   width: 40%;
   padding-top:25px;
+  background: white;
+    padding-top: 3em;
+    padding-bottom: 3em;
+    padding-left: 6em;
+    padding-right: 6em;
+    box-shadow: 7px 7px 11px 0px rgba(0,0,0,0.5);
+    border-radius: 20px;
 }
 
 #restaurantEntry h1 {
   font-weight: bold;
-  padding-top: 25px;
+  padding-top: 75px;
   color:cornflowerblue;
   font-size: 50px;
 
@@ -110,7 +117,6 @@ export default class MyRestaurant extends Vue {
 
 #restaurantEntry input::placeholder {
   text-align: center;
-  letter-spacing: 0;
 }
 
 #restaurantEntry button {
@@ -128,7 +134,7 @@ export default class MyRestaurant extends Vue {
 #restaurant-container {
   background-image: url('~@/assets/blue-restaurant.jpg');
   background-size: cover;
-  padding-bottom:118px;
+  padding-bottom:150px;
 }
 
 </style>

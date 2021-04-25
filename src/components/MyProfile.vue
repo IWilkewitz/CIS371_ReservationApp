@@ -1,4 +1,5 @@
 <template>
+  <div id="profile-container">
     <div id="MyProfile">
         <h1>MY PROFILE</h1>
         <p>View your reservations and account information.</p>
@@ -41,7 +42,7 @@
                 <button type="button" id="changePassword" class="btn btn-outline-success  my-sm-0" v-on:click="changePassword()">Change My Password</button>
             </div>
           </div>
-
+        </div>
         
     </div>
 </template>
@@ -121,6 +122,13 @@ export default class MyProfile extends Vue {
 </script>
 
 <style>
+
+#profile-container {
+  background-image: url('~@/assets/coffee.jpg');
+  background-size: cover;
+  padding-bottom:175px;
+}
+
 #MyProfile {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -132,12 +140,12 @@ export default class MyProfile extends Vue {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 0.3fr 1.7fr 0.7fr 1.6fr;
+  grid-template-rows: 2.1fr 0.1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    ". my-reservations account-details ."
-    ". my-reservations account-details ."
+    ". my-reservations . account-details"
+    ". . . ."
     ". . . .";
 }
 
@@ -145,6 +153,7 @@ export default class MyProfile extends Vue {
   letter-spacing: 0.75px;
   font-weight: bold;
   margin: 0;
+  color: saddlebrown;
 }
 
 #MyProfile label {
@@ -158,8 +167,11 @@ export default class MyProfile extends Vue {
 }
 
 #MyProfile h1 {
+  font-size: 50px;
+  padding-top: 75px;
   margin-top: 25px;
   font-weight: bold;
+  color: saddlebrown;
 }
 
 #my-reservations {
@@ -167,6 +179,7 @@ export default class MyProfile extends Vue {
     padding: 1em;
     text-align: left;
     grid-area: my-reservations;
+    height: 100%;
 }
 
 #account-details {
@@ -174,12 +187,38 @@ export default class MyProfile extends Vue {
     padding: 1em;
     text-align: left;
     grid-area: account-details;
+    height: 100%;
 }
 
 #account-details button {
     margin: 0.25em;
 }
 
+#account-details button {
+  width: 45%;
+  border: 1px solid tan;
+  border-radius: 20px;
+  letter-spacing: 0.1rem;
+  padding: 0.75em;
+  margin-bottom:10px;
+  font-size: 16px;
+  color: white;
+  outline: none;
+  background: tan;
+}
+
+#my-reservations button {
+  width: 45%;
+  border: 1px solid tan;
+  border-radius: 20px;
+  letter-spacing: 0.1rem;
+  padding: 0.75em;
+  margin-bottom:10px;
+  font-size: 16px;
+  color: white;
+  outline: none;
+  background: tan;
+}
 
 
 

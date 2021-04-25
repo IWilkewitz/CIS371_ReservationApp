@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/">Restaurant Reservation Application<br><p><small>By: Erin Long, Jon Rabideau, and Ian Wilkewitz</small></p></a>
       <button
         class="navbar-toggler"
