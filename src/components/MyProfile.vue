@@ -77,6 +77,20 @@ export default class MyProfile extends Vue {
         this.$router.push({ name: "EditAccountDetails" });
     }
 
+    cancelReservation(): void {
+
+      this.$appDB.collection("reservations").doc(this.uid).delete();
+
+      this.$appDB.collection('users').doc(this.uid).collection('res-information').doc('reservations').update({
+        date: "",
+        numDiners: "",
+        restaurantName: "",
+        time: ""
+      })
+
+      
+    }
+
     mounted(): void {
         console.log(this.$appDB.collection('users').doc(this.uid).collection('profile-information').doc('info'))
 

@@ -169,6 +169,7 @@ export default class Home extends Vue {
 
     //FILTERS
   searchRest(): void {
+    
     var formInput = this.search;
     var newArray: any[] = [];
     if (this.holdingArray[0] != null) {
@@ -192,7 +193,7 @@ export default class Home extends Vue {
   }
 
   submitReservation(address: string, name: string): void {
-    this.$appDB.collection(`reservations`).add({
+    this.$appDB.collection(`reservations`).doc(this.uid).set({
       resLocation: address,
       reservationTime: this.resTime,
       numDiners: this.resNum,
@@ -221,6 +222,7 @@ export default class Home extends Vue {
 
     //GET RESTAURANTS FROM API
   findRestaurant() {
+    console.log(this.$appAuth.currentUser?.uid)
     this.holdingArray = [];
     this.search = '';
     var url =
@@ -259,7 +261,7 @@ export default class Home extends Vue {
                 this.allRestaurants.push(element);
             }
             //console.log(element.zip)
-            console.log(this.search)
+            //console.log(this.search)
         })
         
 

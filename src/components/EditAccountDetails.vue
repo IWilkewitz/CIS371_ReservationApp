@@ -54,6 +54,7 @@ export default class Home extends Vue {
             lastName: this.lastName,
             phone: this.phoneNumber,
         });
+        this.$router.push({ name: "MyProfile" });
     }
   
 
