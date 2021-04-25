@@ -147,6 +147,7 @@ export default class Home extends Vue {
   private allRestaurants: any[] = [];
   private showFilter = false;
 
+
   makeReservation(name: string): void {
     if (this.showRes == "") {
       this.showRes = name;

@@ -1,36 +1,34 @@
 <template>
   <div>
-    <div id="restaurantEntry">
-      <h1>ADD MY RESTAURANT</h1>
-      <br/>
-      <br/>
-      <div class="block">
-        <label>Restaurant Name</label>
-        <input type="text" v-model="restName" placeholder="Enter Restaurant Name..." />
+    <div id="restaurant-container">
+      <div id="restaurantEntry">
+        <h1>ADD MY RESTAURANT</h1>
+        <p>Enter the details of your restaurant below.</p>
+        <br/>
+        <br/>
+        <div class="block">
+          <input type="text" v-model="restName" placeholder="Restaurant Name" />
+        </div>
+        <div class="block">
+          <input type="text" v-model="restaddress" placeholder="Restaurant Address" />
+        </div>
+        <div class="block">
+          <input type="text" v-model="restZip" placeholder="Zip Code"/>
+        </div>
+        <div class="block">
+          <input type="text" v-model="restPhoneNumber" placeholder="Phone Number (XXX) XXX - XXXX"/>
+        </div>
+        <div class="block">
+          <input type="text" v-model="restCuisine" placeholder="Cuisine Type" />
+        </div>
+        <br/>
+        <br/>
+        <!-- <div class="block">
+          <label>Picture URL</label>
+          <input type="text" v-model="restPicture" />
+        </div> -->
+        <button v-on:click="addRestaurant" class="btn btn-outline-success  my-sm-0">Add Restaurant</button>
       </div>
-      <div class="block">
-        <label>Address</label>
-        <input type="text" v-model="restaddress" placeholder="Enter Restaurant Address..." />
-      </div>
-      <div class="block">
-        <label>Zip Code</label>
-        <input type="text" v-model="restZip" placeholder="Enter Zip Code..."/>
-      </div>
-      <div class="block">
-        <label>Phone Number</label>
-        <input type="text" v-model="restPhoneNumber" placeholder="(XXX) XXX - XXXX"/>
-      </div>
-      <div class="block">
-        <label>Cuisine</label>
-        <input type="text" v-model="restCuisine" placeholder="Enter Cuisine Type..." />
-      </div>
-      <br/>
-      <br/>
-      <!-- <div class="block">
-        <label>Picture URL</label>
-        <input type="text" v-model="restPicture" />
-      </div> -->
-      <button v-on:click="addRestaurant" class="btn btn-outline-success  my-sm-0">Add Restaurant</button>
     </div>
   </div>
 </template>
@@ -81,7 +79,6 @@ export default class MyRestaurant extends Vue {
 <style >
 .block {
   display: inline-block;
-  margin-left: 1em;
   text-align: left;
   width: 100%;
   margin-bottom: 1em;
@@ -89,24 +86,49 @@ export default class MyRestaurant extends Vue {
 
 #restaurantEntry {
   margin: auto;
-  width: 30%;
+  width: 40%;
   padding-top:25px;
 }
 
 #restaurantEntry h1 {
   font-weight: bold;
+  padding-top: 25px;
+  color:cornflowerblue;
+  font-size: 50px;
 
 }
 
 
 #restaurantEntry input {
-  float: right;
-  width: 70%;
+  float: center;
+  width: 100%;
+  text-align: center;
+  padding: 0.75em;
+  border: 1px solid cornflowerblue;
+  border-radius: 5px;
 }
 
 #restaurantEntry input::placeholder {
-  text-align: right;
+  text-align: center;
   letter-spacing: 0;
+}
+
+#restaurantEntry button {
+  width: 75%;
+  border: 1px solid cornflowerblue;
+  border-radius: 20px;
+  letter-spacing: 0.1rem;
+  padding: 0.75em;
+  font-size: 16px;
+  color: white;
+  outline: none;
+  background: cornflowerblue;
+}
+
+#restaurant-container {
+  background-image: url('~@/assets/blue-restaurant.jpg');
+  background-size: cover;
+  padding-bottom:118px;
 }
 
 </style>

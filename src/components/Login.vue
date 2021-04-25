@@ -154,6 +154,7 @@ export default class Login extends Vue {
   width: 75%;
   border: 1px solid #FF5963;
   border-radius: 5px;
+  background: white;
 }
 
 ::placeholder {
