@@ -34,10 +34,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue} from "vue-property-decorator";
 import { FirebaseFirestore } from "@firebase/firestore-types";
-import { QueryDocumentSnapshot } from "@firebase/firestore-types";
-import { QuerySnapshot } from "@firebase/firestore-types";
 import { FirebaseAuth } from "@firebase/auth-types";
 @Component
 export default class MyRestaurant extends Vue {
@@ -48,8 +46,7 @@ export default class MyRestaurant extends Vue {
   private restZip = '';
   private restPhoneNumber = "";
   private restCuisine = "";
-  private restPicture = "";
-  private uid = "none";
+  
   
 
  
@@ -62,16 +59,18 @@ export default class MyRestaurant extends Vue {
       zip: this.restZip,
       phone: this.restPhoneNumber,
       cuisine: this.restCuisine
-      // picture: this.restPicture,
     });
+
+    this.restName = '';
+    this.restaddress = '';
+    this.restZip = '';
+    this.restPhoneNumber = '';
+    this.restCuisine = '';
   }
 
   
 
-  mounted(): void {
-    this.uid = this.$appAuth.currentUser?.uid ?? "none";
-    console.log(this.uid)
-  }
+  
 }
 </script>
 

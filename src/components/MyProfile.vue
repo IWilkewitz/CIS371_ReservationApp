@@ -6,7 +6,7 @@
         <br/>
         <br/>
         <div class="grid-container">
-            <div id="my-reservations" v-for="(z,pos) in resInfo" :key="pos">
+            <div id="my-reservations" v-for="(z, p) in resInfo" :key="  + p">
                 <h3>My Reservations</h3>
                 <br/>
                 <label>Restaurant Name:</label>
@@ -25,7 +25,7 @@
                     <br/>
                     <button type="button" id="cancelReservation" class="btn btn-outline-success" v-on:click="cancelReservation()">Cancel Reservation</button>
             </div>
-            <div id="account-details" v-for="(z, pos) in profileInfo" :key="pos">
+            <div id="account-details" v-for="(z, pos) in profileInfo" :key="'info' + pos">
                 <h3>My Account Details</h3>
                 
                 <br/>
@@ -92,7 +92,7 @@ export default class MyProfile extends Vue {
     }
 
     mounted(): void {
-        console.log(this.$appDB.collection('users').doc(this.uid).collection('profile-information').doc('info'))
+        //console.log(this.$appDB.collection('users').doc(this.uid).collection('profile-information').doc('info'))
 
         
 

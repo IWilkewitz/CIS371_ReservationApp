@@ -279,8 +279,8 @@ export default class Home extends Vue {
 
   mounted(): void {
     this.showFilter = false;
-    this.uid = this.$appAuth.currentUser?.uid ?? "none";
-    //console.log(this.uid)
+    //this.uid = this.$appAuth.currentUser?.uid ?? "none";
+    console.log(this.$appAuth.currentUser?.uid)
     //GET USER CREATED RESTAURANTS
     this.$appDB
       .collection("restaurants")
@@ -359,7 +359,7 @@ export default class Home extends Vue {
 }
 
 #featured-restaurants {
-  background-image: url('~@/assets/green_food.jpg');
+  /* background-image: url('~@/assets/green_food.jpg'); */
   background-size: cover;
   padding-bottom:550px;
 }
