@@ -7,7 +7,7 @@
       <input type="text" v-model="userEmail" placeholder="Email" />
       <br />
       <br />
-      <input type="text" v-model="userPassword" placeholder="Password" />
+      <input type="password" v-model="userPassword" placeholder="Password" />
       <br />
       <br />
       <button :disabled="noInput" v-on:click="authenticate">LOGIN</button>
